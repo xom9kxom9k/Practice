@@ -163,6 +163,76 @@ namespace PracticeOne
 
             buttonStart.Enabled = true;
         }
+        private void buttonAddOneArray_Click(object sender, EventArgs e)
+        {
+            textBoxArray.Clear();
+            string input = textBoxInput.Text;
+            string[] numbers = input.Split(' ');
+            colsCount = numbers.Length;
+            if (currentTask == 3)
+            { 
+                arrayOne = new int[colsCount * 2];
+            }
+            else
+            {
+                arrayOne = new int[colsCount];
+            }
+            for (int i = 0; i < colsCount; i++)
+            {
+                if (int.TryParse(numbers[i], out int number))
+                {
+                    arrayOne[i] = number;
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка ввода чисел!");
+                    return;
+                }
+            }
+            textBoxArray.Text = string.Join(", ", arrayOne);
+        }
+
+        private void buttonAddTwoArray_Click(object sender, EventArgs e)
+        {
+            textBoxArray.Clear();
+            string input = textBoxInput.Text;
+            string[] rows = input.Split(';');
+            rowsCount = rows.Length;
+            colsCount = rows[0].Split(' ').Length;
+            if (currentTask == 5)
+            {
+                arrayTwo = new int[rowsCount * 2, colsCount];
+            }
+            else
+            {
+                arrayTwo = new int[rowsCount, colsCount];   
+            }
+            for (int i = 0; i < rowsCount; i++)
+            {
+                string[] numbers = rows[i].Split(' ');
+
+                for (int j = 0; j < colsCount; j++)
+                {
+                    if (int.TryParse(numbers[j], out int number))
+                    {
+                        arrayTwo[i, j] = number;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка ввода чисел!");
+                        return;
+                    }
+                }
+            }
+            for (int i = 0; i < rowsCount; i++)
+            {
+                for (int j = 0; j < colsCount; j++)
+                {
+                    textBoxArray.Text += arrayTwo[i, j].ToString() + " ";
+                }
+                textBoxArray.Text += Environment.NewLine;
+            }
+        }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -218,11 +288,11 @@ namespace PracticeOne
                     int negIndex = -1;
                     int posIndex = -1;
 
-                    for ( int i = 0; i < arrayOne.Length; i ++)
+                    for (int i = 0; i < arrayOne.Length; i++)
                     {
-                        if (arrayOne[i] > 0) posIndex = arrayOne[i]; 
+                        if (arrayOne[i] > 0) posIndex = arrayOne[i];
                     }
-                    for (int i = arrayOne.Length - 1; i >=0; i--)
+                    for (int i = arrayOne.Length - 1; i >= 0; i--)
                     {
                         if (arrayOne[i] < 0) negIndex = arrayOne[i];
                     }
@@ -253,9 +323,7 @@ namespace PracticeOne
                     {
                         if (arrayOne[i] % 2 != 0 && arrayOne[i] != 0)
                         {
-                            int m = arrayOne.Length;
-
-                            for (int j = m - 1; j > i + 1; j--)
+                            for (int j = arrayOne.Length - 1; j > i + 1; j--)
                             {
                                 arrayOne[j] = arrayOne[j - 1];
                             }
@@ -295,70 +363,90 @@ namespace PracticeOne
 
                     break;
                 case 5:
-
-                    /// сделаю 
-                    break;
-                case 6:
-                    rows = array2D.GetLength(0);
-                    cols = array2D.GetLength(1);
-
-                    //Преобразуем в одномерный массив
-                    int[] array = new int[rows * cols];
-                    int index = 0;
-
-                    for (int i = 0; i < rows; i++)
+                    n = rowsCount;
+                    int m = colsCount;
+                    int count = 0;
+                    int SrArifm = 0;
+                    for (int i = 0; i < n; i++)
                     {
-                        for (int j = 0; j < cols; j++)
+                        for (int j = 0; j < m; j++)
                         {
-                            array[index++] = array2D[i, j];
+                            SrArifm += arrayTwo[i, j];
+                            count++;
                         }
                     }
 
-                    n = array.Length;
-                    bool swapped;
+                    SrArifm = SrArifm / count;
 
-                    do
+                    for (int i = 0; i < n; i++)
                     {
-                        swapped = false;
-                        for (int i = 0; i < n - 1; i++)
+                        count = 0;
+                        for (int j = 0; j < m; j++)
                         {
-                            if (array[i] < array[i + 1])
+                            if (arrayTwo[i, j] != 0)
                             {
-                                int temp = array[i];
-                                array[i] = array[i + 1];
-                                array[i + 1] = temp;
-                                swapped = true;
+                                if (Math.Abs(arrayTwo[i, j]) < SrArifm)
+                                {
+                                    count++;
+                                }
                             }
                         }
-                        n--;
-                    } while (swapped);
-
-                    index = 0;
-
-                    for (int i = 0; i < rows; i++)
-                    {
-                        for (int j = 0; j < cols; j++)
+                        if (count > 0)
                         {
-                            array2D[i, j] = array[index++];
+                            for (int k = n; k > i + 1; k--)
+                            {
+                                for (int l = 0; l < m; l++)
+                                {
+                                    arrayTwo[k, l] = arrayTwo[k - 1, l];
+                                }
+                            }
+                            for (int l = 0; l < m; l++)
+                            {
+                                arrayTwo[i + 1, l] = 1;
+                            }
+                            n++;
+                            i++;
                         }
                     }
 
-                    textBoxResult.Clear();
-                    rows = array2D.GetLength(0);
-                    cols = array2D.GetLength(1);
-                    result = "";
-
-                    for (int i = 0; i < rows; i++)
+                    for (int i = 0; i < n; i++)
                     {
-                        for (int j = 0; j < cols; j++)
+                        for (int j = 0; j < m; j++)
                         {
-                            result += array2D[i, j].ToString() + "\t";
+                            textBoxResult.Text += arrayTwo[i, j].ToString() + " ";
                         }
-                        result += Environment.NewLine;
+                        textBoxResult.Text += Environment.NewLine;
+                    } 
+                    break;
+                case 6:
+                    for (int i = 0; i < arrayTwo.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < arrayTwo.GetLength(1); j++)
+                        {
+                            for (int x = 0; x < arrayTwo.GetLength(0); x++)
+                            {
+                                for (int y = 0; y < arrayTwo.GetLength(1); y++)
+                                {
+                                    if (arrayTwo[i, j] > arrayTwo[x, y])
+                                    {
+                                        int zam = arrayTwo[i, j];
+                                        arrayTwo[i, j] = arrayTwo[x, y];
+                                        arrayTwo[x, y] = zam;
+                                    }   
+                                }
+                            }
+                        }
                     }
-
-                    textBoxResult.Text = result;
-
+                    n = rowsCount;
+                    m = colsCount;
+                    for (int i = 0; i < n; i++)
+                    {
+                        for (int j = 0; j < m; j++)
+                        {
+                            textBoxResult.Text += arrayTwo[i, j].ToString() + " ";
+                        }
+                        textBoxResult.Text += Environment.NewLine;
+                    }
                     break;
             }
         }

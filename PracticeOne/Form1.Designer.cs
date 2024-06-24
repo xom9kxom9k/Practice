@@ -36,6 +36,10 @@
             buttonTwo = new Button();
             buttonOne = new Button();
             panelArray = new Panel();
+            labelAdd = new Label();
+            buttonAddTwoArray = new Button();
+            buttonAddOneArray = new Button();
+            textBoxInput = new TextBox();
             buttonTwoArray = new Button();
             buttonOneArray = new Button();
             textBoxArray = new TextBox();
@@ -136,6 +140,10 @@
             // 
             // panelArray
             // 
+            panelArray.Controls.Add(labelAdd);
+            panelArray.Controls.Add(buttonAddTwoArray);
+            panelArray.Controls.Add(buttonAddOneArray);
+            panelArray.Controls.Add(textBoxInput);
             panelArray.Controls.Add(buttonTwoArray);
             panelArray.Controls.Add(buttonOneArray);
             panelArray.Controls.Add(textBoxArray);
@@ -147,14 +155,50 @@
             panelArray.Controls.Add(labelRows);
             panelArray.Controls.Add(numericUpDownCols);
             panelArray.Controls.Add(numericUpDownRow);
-            panelArray.Location = new Point(428, 0);
+            panelArray.Location = new Point(196, 0);
             panelArray.Name = "panelArray";
-            panelArray.Size = new Size(371, 206);
+            panelArray.Size = new Size(603, 206);
             panelArray.TabIndex = 1;
+            // 
+            // labelAdd
+            // 
+            labelAdd.AutoSize = true;
+            labelAdd.Location = new Point(6, 57);
+            labelAdd.Name = "labelAdd";
+            labelAdd.Size = new Size(231, 30);
+            labelAdd.TabIndex = 14;
+            labelAdd.Text = "Добавление одномерного и двумерного\r\nмассива:";
+            // 
+            // buttonAddTwoArray
+            // 
+            buttonAddTwoArray.Location = new Point(126, 119);
+            buttonAddTwoArray.Name = "buttonAddTwoArray";
+            buttonAddTwoArray.Size = new Size(99, 57);
+            buttonAddTwoArray.TabIndex = 13;
+            buttonAddTwoArray.Text = "Добавить двумерный массив";
+            buttonAddTwoArray.UseVisualStyleBackColor = true;
+            buttonAddTwoArray.Click += buttonAddTwoArray_Click;
+            // 
+            // buttonAddOneArray
+            // 
+            buttonAddOneArray.Location = new Point(22, 119);
+            buttonAddOneArray.Name = "buttonAddOneArray";
+            buttonAddOneArray.Size = new Size(98, 57);
+            buttonAddOneArray.TabIndex = 12;
+            buttonAddOneArray.Text = "Добавить одномерный массив";
+            buttonAddOneArray.UseVisualStyleBackColor = true;
+            buttonAddOneArray.Click += buttonAddOneArray_Click;
+            // 
+            // textBoxInput
+            // 
+            textBoxInput.Location = new Point(22, 90);
+            textBoxInput.Name = "textBoxInput";
+            textBoxInput.Size = new Size(203, 23);
+            textBoxInput.TabIndex = 11;
             // 
             // buttonTwoArray
             // 
-            buttonTwoArray.Location = new Point(265, 144);
+            buttonTwoArray.Location = new Point(497, 144);
             buttonTwoArray.Name = "buttonTwoArray";
             buttonTwoArray.Size = new Size(99, 45);
             buttonTwoArray.TabIndex = 10;
@@ -164,7 +208,7 @@
             // 
             // buttonOneArray
             // 
-            buttonOneArray.Location = new Point(265, 90);
+            buttonOneArray.Location = new Point(497, 90);
             buttonOneArray.Name = "buttonOneArray";
             buttonOneArray.Size = new Size(99, 45);
             buttonOneArray.TabIndex = 9;
@@ -174,7 +218,7 @@
             // 
             // textBoxArray
             // 
-            textBoxArray.Location = new Point(18, 90);
+            textBoxArray.Location = new Point(250, 90);
             textBoxArray.Multiline = true;
             textBoxArray.Name = "textBoxArray";
             textBoxArray.ScrollBars = ScrollBars.Vertical;
@@ -184,7 +228,7 @@
             // labelMax
             // 
             labelMax.AutoSize = true;
-            labelMax.Location = new Point(203, 48);
+            labelMax.Location = new Point(435, 48);
             labelMax.Name = "labelMax";
             labelMax.Size = new Size(93, 15);
             labelMax.TabIndex = 7;
@@ -193,7 +237,7 @@
             // labelMin
             // 
             labelMin.AutoSize = true;
-            labelMin.Location = new Point(18, 46);
+            labelMin.Location = new Point(250, 46);
             labelMin.Name = "labelMin";
             labelMin.Size = new Size(89, 15);
             labelMin.TabIndex = 6;
@@ -201,30 +245,27 @@
             // 
             // numericUpDownMax
             // 
-            numericUpDownMax.Location = new Point(302, 46);
+            numericUpDownMax.Location = new Point(534, 46);
             numericUpDownMax.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
-            numericUpDownMax.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownMax.Name = "numericUpDownMax";
             numericUpDownMax.Size = new Size(62, 23);
             numericUpDownMax.TabIndex = 5;
-            numericUpDownMax.Value = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownMax.ValueChanged += numericUpDownMax_ValueChanged;
             // 
             // numericUpDownMin
             // 
-            numericUpDownMin.Location = new Point(128, 46);
-            numericUpDownMin.Maximum = new decimal(new int[] { 1, 0, 0, int.MinValue });
+            numericUpDownMin.Location = new Point(360, 46);
+            numericUpDownMin.Maximum = new decimal(new int[] { 0, 0, 0, 0 });
             numericUpDownMin.Minimum = new decimal(new int[] { 1000, 0, 0, int.MinValue });
             numericUpDownMin.Name = "numericUpDownMin";
             numericUpDownMin.Size = new Size(62, 23);
             numericUpDownMin.TabIndex = 4;
-            numericUpDownMin.Value = new decimal(new int[] { 1, 0, 0, int.MinValue });
             numericUpDownMin.ValueChanged += numericUpDownMin_ValueChanged;
             // 
             // labelCols
             // 
             labelCols.AutoSize = true;
-            labelCols.Location = new Point(18, 19);
+            labelCols.Location = new Point(250, 19);
             labelCols.Name = "labelCols";
             labelCols.Size = new Size(104, 15);
             labelCols.TabIndex = 3;
@@ -233,7 +274,7 @@
             // labelRows
             // 
             labelRows.AutoSize = true;
-            labelRows.Location = new Point(213, 19);
+            labelRows.Location = new Point(445, 19);
             labelRows.Name = "labelRows";
             labelRows.Size = new Size(83, 15);
             labelRows.TabIndex = 2;
@@ -241,7 +282,7 @@
             // 
             // numericUpDownCols
             // 
-            numericUpDownCols.Location = new Point(128, 17);
+            numericUpDownCols.Location = new Point(360, 17);
             numericUpDownCols.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownCols.Name = "numericUpDownCols";
             numericUpDownCols.Size = new Size(38, 23);
@@ -251,7 +292,7 @@
             // 
             // numericUpDownRow
             // 
-            numericUpDownRow.Location = new Point(302, 17);
+            numericUpDownRow.Location = new Point(534, 17);
             numericUpDownRow.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownRow.Name = "numericUpDownRow";
             numericUpDownRow.Size = new Size(38, 23);
@@ -345,5 +386,9 @@
         private TextBox textBoxInfo;
         private Button buttonStart;
         private TextBox textBoxResult;
+        private Button buttonAddTwoArray;
+        private Button buttonAddOneArray;
+        private TextBox textBoxInput;
+        private Label labelAdd;
     }
 }
