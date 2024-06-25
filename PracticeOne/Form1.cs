@@ -313,7 +313,7 @@ namespace PracticeOne
                         posIndex--;
                     }
 
-                    textBoxResult.Text = string.Join(", ", arrayOne);
+                    textBoxResult.Text = string.Join(" ", arrayOne);
 
                     break;
                 case 3:
@@ -335,7 +335,7 @@ namespace PracticeOne
                         }
                     }
 
-                    textBoxResult.Text = string.Join(", ", arrayOne);
+                    textBoxResult.Text = string.Join(" ", arrayOne);
 
                     break;
                 case 4:
@@ -358,7 +358,7 @@ namespace PracticeOne
                     textBoxResult.Clear();
                     for (int i = 0; i < newLength; i++)
                     {
-                        textBoxResult.Text += arrayOne[i].ToString() + ", ";
+                        textBoxResult.Text += arrayOne[i].ToString() + " ";
                     }
 
                     break;
