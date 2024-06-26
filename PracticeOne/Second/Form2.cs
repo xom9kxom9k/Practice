@@ -17,7 +17,9 @@ namespace PracticeOne.Second
     {
         Deck deck = new();
         int[] arr = new int[10];
-
+        private int[] array1D;
+        private List<int[]> quickSteps = new List<int[]>();
+        private int currentStep = -1;
 
         public Form2()
         {
@@ -42,39 +44,19 @@ namespace PracticeOne.Second
 
         private void buttonResultOne_Click(object sender, EventArgs e) => textBoxResultOne.Text = deck.Print();
 
-        private void PrintArray()
-        {
-            string text = "";
-            for (int i = 0; i < arr.Length; i++)
-            {
-                text += arr[i] + " ";
-            }
-            textBoxResultTwo.Text = text + Environment.NewLine;
 
-        }
-
-        private void buttonGenerate_Click(object sender, EventArgs e)
-        {
-            textBoxResultTwo.Clear();
-            Random random = new Random();
-            for (int i = 0; i < arr.Length; i++)
-            {
-                arr[i] = random.Next(-100, 100);
-            }
-            PrintArray();
-        }
-        private void QuickSort(int[] arr, int low, int high)
+        private void QuickSort(int[] arr, int low, int high, Form2 mainInstance)
         {
             if (low < high)
             {
-                int pi = Partition(arr, low, high);
+                int pi = Partition(arr, low, high, mainInstance);
 
-                QuickSort(arr, low, pi - 1);
-                QuickSort(arr, pi + 1, high);
+                QuickSort(arr, low, pi - 1, mainInstance);
+                QuickSort(arr, pi + 1, high, mainInstance);
             }
         }
 
-        private int Partition(int[] arr, int low, int high)
+        private int Partition(int[] arr, int low, int high, Form2 mainInstance)
         {
             int pivot = arr[high];
             int i = low - 1;
@@ -85,12 +67,11 @@ namespace PracticeOne.Second
                 {
                     i++;
                     Swap(arr, i, j);
-                    PrintArray(arr);
+                    mainInstance.quickSteps.Add(arr.ToArray());
                 }
             }
             Swap(arr, i + 1, high);
-            PrintArray(arr);
-
+            mainInstance.quickSteps.Add(arr.ToArray());
             return i + 1;
         }
 
@@ -100,20 +81,54 @@ namespace PracticeOne.Second
             arr[i] = arr[j];
             arr[j] = temp;
         }
-        private void PrintArray(int[] arr)
-        {
-            textBoxResultTwo.AppendText(string.Join(" ", arr) + Environment.NewLine);
-        }
+
 
         private void buttonResultTwo_Click(object sender, EventArgs e)
         {
-            QuickSort(arr, 0, arr.Length - 1);
-            textBoxResultTwo.Text = string.Join(" ", arr);
+            string[] massive = textBoxInput.Text.Split();
+            array1D = new int[massive.Length];
+
+            if (massive.Length > 0)
+            {
+                for (int i = 0; i < massive.Length; i++)
+                {
+                    array1D[i] = Int32.Parse(massive[i]);
+                }
+            }
+
+            quickSteps.Clear();
+            currentStep = -1;
+            QuickSort(array1D, 0, array1D.Length - 1, this);
+
+            textBoxResultTwo.Text = string.Join(", ", array1D);
         }
 
         private void buttonStep_Click(object sender, EventArgs e)
         {
-            QuickSort(arr, 0, arr.Length - 1);
+            if (currentStep < quickSteps.Count - 1)
+            {
+                currentStep++;
+                ShowCurrentStep();
+            }
+        }
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            if (currentStep > -1)
+            {
+                currentStep--;
+                ShowCurrentStep();
+            }
+        }
+        private void ShowCurrentStep()
+        {
+            if (currentStep >= 0 && currentStep < quickSteps.Count)
+            {
+                textBoxStepTwo.Text = string.Join(" ", quickSteps[currentStep]);
+            }
+            else
+            {
+                textBoxStepTwo.Text = string.Join(" ", array1D);
+            }
         }
 
 

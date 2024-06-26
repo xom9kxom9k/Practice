@@ -46,10 +46,12 @@
             textBoxInfoThree = new TextBox();
             labelInfoThree = new Label();
             panelTwo = new Panel();
+            textBoxInput = new TextBox();
+            buttonBack = new Button();
+            textBoxStepTwo = new TextBox();
             buttonStep = new Button();
             textBoxResultTwo = new TextBox();
             buttonResultTwo = new Button();
-            buttonGenerate = new Button();
             labelInfoTwo = new Label();
             textBoxInfoTwo = new TextBox();
             panelOne.SuspendLayout();
@@ -217,10 +219,12 @@
             // 
             // panelTwo
             // 
+            panelTwo.Controls.Add(textBoxInput);
+            panelTwo.Controls.Add(buttonBack);
+            panelTwo.Controls.Add(textBoxStepTwo);
             panelTwo.Controls.Add(buttonStep);
             panelTwo.Controls.Add(textBoxResultTwo);
             panelTwo.Controls.Add(buttonResultTwo);
-            panelTwo.Controls.Add(buttonGenerate);
             panelTwo.Controls.Add(labelInfoTwo);
             panelTwo.Controls.Add(textBoxInfoTwo);
             panelTwo.Dock = DockStyle.Fill;
@@ -229,11 +233,36 @@
             panelTwo.Size = new Size(310, 450);
             panelTwo.TabIndex = 2;
             // 
+            // textBoxInput
+            // 
+            textBoxInput.Location = new Point(6, 158);
+            textBoxInput.Name = "textBoxInput";
+            textBoxInput.Size = new Size(300, 23);
+            textBoxInput.TabIndex = 8;
+            // 
+            // buttonBack
+            // 
+            buttonBack.Location = new Point(158, 280);
+            buttonBack.Name = "buttonBack";
+            buttonBack.Size = new Size(149, 40);
+            buttonBack.TabIndex = 7;
+            buttonBack.Text = "Назад";
+            buttonBack.UseVisualStyleBackColor = true;
+            buttonBack.Click += buttonBack_Click;
+            // 
+            // textBoxStepTwo
+            // 
+            textBoxStepTwo.Location = new Point(6, 326);
+            textBoxStepTwo.Multiline = true;
+            textBoxStepTwo.Name = "textBoxStepTwo";
+            textBoxStepTwo.Size = new Size(298, 60);
+            textBoxStepTwo.TabIndex = 6;
+            // 
             // buttonStep
             // 
-            buttonStep.Location = new Point(6, 251);
+            buttonStep.Location = new Point(6, 280);
             buttonStep.Name = "buttonStep";
-            buttonStep.Size = new Size(298, 40);
+            buttonStep.Size = new Size(149, 40);
             buttonStep.TabIndex = 5;
             buttonStep.Text = "Шаг";
             buttonStep.UseVisualStyleBackColor = true;
@@ -241,32 +270,21 @@
             // 
             // textBoxResultTwo
             // 
-            textBoxResultTwo.Location = new Point(6, 297);
+            textBoxResultTwo.Location = new Point(6, 392);
             textBoxResultTwo.Multiline = true;
             textBoxResultTwo.Name = "textBoxResultTwo";
-            textBoxResultTwo.ScrollBars = ScrollBars.Vertical;
-            textBoxResultTwo.Size = new Size(298, 150);
+            textBoxResultTwo.Size = new Size(298, 55);
             textBoxResultTwo.TabIndex = 4;
             // 
             // buttonResultTwo
             // 
-            buttonResultTwo.Location = new Point(6, 204);
+            buttonResultTwo.Location = new Point(6, 187);
             buttonResultTwo.Name = "buttonResultTwo";
             buttonResultTwo.Size = new Size(298, 41);
             buttonResultTwo.TabIndex = 3;
-            buttonResultTwo.Text = "Конечная сортировка";
+            buttonResultTwo.Text = "Сортировка";
             buttonResultTwo.UseVisualStyleBackColor = true;
             buttonResultTwo.Click += buttonResultTwo_Click;
-            // 
-            // buttonGenerate
-            // 
-            buttonGenerate.Location = new Point(6, 158);
-            buttonGenerate.Name = "buttonGenerate";
-            buttonGenerate.Size = new Size(298, 40);
-            buttonGenerate.TabIndex = 2;
-            buttonGenerate.Text = "Сгенерировать массив";
-            buttonGenerate.UseVisualStyleBackColor = true;
-            buttonGenerate.Click += buttonGenerate_Click;
             // 
             // labelInfoTwo
             // 
@@ -318,7 +336,6 @@
         private TextBox textBoxResultOne;
         private TextBox textBoxInfoTwo;
         private Label labelInfoTwo;
-        private Button buttonGenerate;
         private Button buttonResultTwo;
         private TextBox textBoxResultTwo;
         private Button buttonStep;
@@ -330,5 +347,8 @@
         private Button buttonRemoveEnd;
         private Button buttonAddEnd;
         private Label labelStart;
+        private TextBox textBoxStepTwo;
+        private Button buttonBack;
+        private TextBox textBoxInput;
     }
 }
