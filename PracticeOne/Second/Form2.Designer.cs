@@ -39,9 +39,9 @@
             labelInfoOne = new Label();
             textBoxInfoOne = new TextBox();
             panelThree = new Panel();
+            labelStart = new Label();
             textBoxResultThree = new TextBox();
             buttonResultThree = new Button();
-            textBoxLineTwo = new TextBox();
             textBoxLineOne = new TextBox();
             textBoxInfoThree = new TextBox();
             labelInfoThree = new Label();
@@ -151,9 +151,9 @@
             // 
             // panelThree
             // 
+            panelThree.Controls.Add(labelStart);
             panelThree.Controls.Add(textBoxResultThree);
             panelThree.Controls.Add(buttonResultThree);
-            panelThree.Controls.Add(textBoxLineTwo);
             panelThree.Controls.Add(textBoxLineOne);
             panelThree.Controls.Add(textBoxInfoThree);
             panelThree.Controls.Add(labelInfoThree);
@@ -162,6 +162,15 @@
             panelThree.Name = "panelThree";
             panelThree.Size = new Size(316, 450);
             panelThree.TabIndex = 1;
+            // 
+            // labelStart
+            // 
+            labelStart.AutoSize = true;
+            labelStart.Location = new Point(19, 174);
+            labelStart.Name = "labelStart";
+            labelStart.Size = new Size(149, 15);
+            labelStart.TabIndex = 6;
+            labelStart.Text = "С какой вершины начать:";
             // 
             // textBoxResultThree
             // 
@@ -173,25 +182,19 @@
             // 
             // buttonResultThree
             // 
-            buttonResultThree.Location = new Point(127, 158);
+            buttonResultThree.Location = new Point(6, 211);
             buttonResultThree.Name = "buttonResultThree";
-            buttonResultThree.Size = new Size(186, 52);
+            buttonResultThree.Size = new Size(307, 41);
             buttonResultThree.TabIndex = 4;
             buttonResultThree.Text = "Результат";
             buttonResultThree.UseVisualStyleBackColor = true;
-            // 
-            // textBoxLineTwo
-            // 
-            textBoxLineTwo.Location = new Point(6, 187);
-            textBoxLineTwo.Name = "textBoxLineTwo";
-            textBoxLineTwo.Size = new Size(100, 23);
-            textBoxLineTwo.TabIndex = 3;
+            buttonResultThree.Click += buttonResultThree_Click;
             // 
             // textBoxLineOne
             // 
-            textBoxLineOne.Location = new Point(6, 158);
+            textBoxLineOne.Location = new Point(171, 171);
             textBoxLineOne.Name = "textBoxLineOne";
-            textBoxLineOne.Size = new Size(100, 23);
+            textBoxLineOne.Size = new Size(142, 23);
             textBoxLineOne.TabIndex = 2;
             // 
             // textBoxInfoThree
@@ -201,6 +204,7 @@
             textBoxInfoThree.Name = "textBoxInfoThree";
             textBoxInfoThree.Size = new Size(310, 126);
             textBoxInfoThree.TabIndex = 1;
+            textBoxInfoThree.Text = "Обход в ширину - это метод обхода графа, начиная с заданной вершины (начальной точки), поочередно посещая все смежные вершины на текущем уровне перед тем, как переходить к вершинам следующего уровня.";
             // 
             // labelInfoThree
             // 
@@ -233,12 +237,14 @@
             buttonStep.TabIndex = 5;
             buttonStep.Text = "Шаг";
             buttonStep.UseVisualStyleBackColor = true;
+            buttonStep.Click += buttonStep_Click;
             // 
             // textBoxResultTwo
             // 
             textBoxResultTwo.Location = new Point(6, 297);
             textBoxResultTwo.Multiline = true;
             textBoxResultTwo.Name = "textBoxResultTwo";
+            textBoxResultTwo.ScrollBars = ScrollBars.Vertical;
             textBoxResultTwo.Size = new Size(298, 150);
             textBoxResultTwo.TabIndex = 4;
             // 
@@ -250,6 +256,7 @@
             buttonResultTwo.TabIndex = 3;
             buttonResultTwo.Text = "Конечная сортировка";
             buttonResultTwo.UseVisualStyleBackColor = true;
+            buttonResultTwo.Click += buttonResultTwo_Click;
             // 
             // buttonGenerate
             // 
@@ -259,6 +266,7 @@
             buttonGenerate.TabIndex = 2;
             buttonGenerate.Text = "Сгенерировать массив";
             buttonGenerate.UseVisualStyleBackColor = true;
+            buttonGenerate.Click += buttonGenerate_Click;
             // 
             // labelInfoTwo
             // 
@@ -276,6 +284,7 @@
             textBoxInfoTwo.Name = "textBoxInfoTwo";
             textBoxInfoTwo.Size = new Size(304, 126);
             textBoxInfoTwo.TabIndex = 0;
+            textBoxInfoTwo.Text = resources.GetString("textBoxInfoTwo.Text");
             // 
             // Form2
             // 
@@ -316,10 +325,10 @@
         private Label labelInfoThree;
         private TextBox textBoxInfoThree;
         private TextBox textBoxLineOne;
-        private TextBox textBoxLineTwo;
         private Button buttonResultThree;
         private TextBox textBoxResultThree;
         private Button buttonRemoveEnd;
         private Button buttonAddEnd;
+        private Label labelStart;
     }
 }
