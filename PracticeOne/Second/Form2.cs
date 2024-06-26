@@ -100,7 +100,7 @@ namespace PracticeOne.Second
             currentStep = -1;
             QuickSort(array1D, 0, array1D.Length - 1, this);
 
-            textBoxResultTwo.Text = string.Join(", ", array1D);
+            textBoxResultTwo.Text = string.Join(" ", array1D);
         }
 
         private void buttonStep_Click(object sender, EventArgs e)
