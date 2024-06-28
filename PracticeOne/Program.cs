@@ -1,4 +1,8 @@
-using PracticeOne.Fourth;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using PracticeOne.Fifth;
+using Serilog;
+using System;
 
 namespace PracticeOne
 {
@@ -12,8 +16,27 @@ namespace PracticeOne
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+            /*ApplicationConfiguration.Initialize();
+            Application.Run(new Form4());*/
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form4());
+            ServiceCollection services = new();
+            ConfigureServices(services);
+            using ServiceProvider serviceProvider = services.BuildServiceProvider();
+            Application.Run(serviceProvider.GetRequiredService<Form5>());
+        }
+        private static void ConfigureServices(ServiceCollection services)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("Settings.json")
+                .Build();
+            services.AddSingleton<Form5>()
+                    .AddLogging(builder =>
+                    {
+                        builder.AddSerilog(new LoggerConfiguration()
+                            .ReadFrom.Configuration(configuration)
+                            .CreateLogger());
+                    });
         }
     }
 }
